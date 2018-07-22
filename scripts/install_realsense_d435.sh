@@ -29,3 +29,8 @@ echo "
 Copying udev rules"
 sudo cp -v $SCRIPTPATH/../udev_rules/99-realsense-libusb.rules /etc/udev/rules.d/
 
+# Reload udev rules
+echo "
+
+Reloading udev rules"
+udevadm control --reload-rules && udevadm trigger
