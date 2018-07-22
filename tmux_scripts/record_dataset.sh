@@ -17,6 +17,8 @@ input=(
 '
   'Multimaster' 'sleep 3; roslaunch '"$PROJECT_NAME"' multimaster.launch
 '
+	'RealSense' 'sleep 3; roslaunch '"$PROJECT_NAME"' camp_dataset.launch student_name:='"$PROJECT_NAME"'
+  '
 	'RosBag' 'sleep 5; roslaunch '"$PROJECT_NAME"' rosbag_record.launch student_name:='"$PROJECT_NAME"'
 '
   'RTK' 'sleep 3; roslaunch nmea_navsat_driver navsat_driver.launch

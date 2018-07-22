@@ -1,6 +1,0 @@
-main:
-  
-  uav_name_list: [uav1]
-
-uav1:
-  filename: /../../trajectories/identification/trajectory_sine_full_111s_1108pts.txt

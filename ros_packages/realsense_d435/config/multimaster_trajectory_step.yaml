@@ -1,6 +1,0 @@
-main:
-  
-  uav_name_list: [uav1]
-
-uav1:
-  filename: /../../trajectories/identification/trajectory_step_full_42s_420pts.txt
