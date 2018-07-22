@@ -56,7 +56,7 @@ yawModel:
 
 yawTracker:
   yawGain: 1.0
-  maxYawRate: 0.5
+  maxYawRate: 1.0
 
 cvxgenMpc:
   horizon_len: 40 # Horizon length is hardcoded in cvxgen code, this value is used in other parts of the code
@@ -65,34 +65,23 @@ cvxgenMpc:
   dt: 0.01
   dt2: 0.2
 
-  # !!! MAX 8.33
-  maxHorizontalSpeed: 0.2
-  # !!! MAX 2.33
-  maxHorizontalAcceleration: 0.2
-  # !!! DO NOT CHANGE
+  maxHorizontalSpeed: 8.33
+  maxHorizontalAcceleration: 2.33
   maxHorizontalJerk: 3.0
 
-  # !!! MAX 2.0
-  maxVerticalAscendingSpeed: 0.5
-  # !!! MAX 1.0
-  maxVerticalAscendingAcceleration: 0.5
-  # !!! DO NOT CHANGE
+  maxVerticalAscendingSpeed: 2.0
+  maxVerticalAscendingAcceleration: 1.0
   maxVerticalAscendingJerk: 3.0
 
-  # !!! MAX 1.0
   maxVerticalDescendingSpeed: 1.0
-  # !!! MAX 1.0
   maxVerticalDescendingAcceleration: 1.0
-  # !!! DO NOT CHANGE
   maxVerticalDescendingJerk: 1.5
 
-  # !!! MAX 1.0
   maxYawRate: 1.0
-  # !!! MAX 2.0
-  maxYawAcceleration: 0.5
+  maxYawAcceleration: 2.0
 
   maxAltitude: 20.0
-  minAltitude: 0.4
+  minAltitude: 1.0
 
 cvxWrapper:
   verbose: false # cvxgen's debug output

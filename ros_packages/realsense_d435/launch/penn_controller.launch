@@ -4,31 +4,14 @@
   <arg name="debug" default="true" />
   <arg name="mass" default="$(optenv UAV_MASS)"/>
   <arg name="world_file" default="$(find mrs_main)/config/world_current.yaml"/>
-  <arg name="use_icp_odom" default="false"/>
-  <arg name="use_mrs_odom" default="false"/>
-  <arg name="use_switched_odom" default="false"/>
-
 
   <group ns="$(arg uav_name)">
     <!-- This launch file is for F550 -->
 
-    <arg name="config_path" default="$(find lidar_localization)/config/penn_controller/config_f550"/>
+    <arg name="config_path" default="$(find penn_controller)/config_f550"/>
 
     <!-- Topic for new odometry -->
     <arg name="mrs_odometry" default="mrs_odometry/new_odom"/>
-
-    <!-- Topic for icp odometry -->
-    <arg name="icp_odometry" default="icp_odometry/new_odom"/>
-
-    <!-- Topic for switched odometry -->
-    <arg name="switched_odometry" default="switched_odometry/new_odom"/>
-
-    <!-- Use correct odometry -->
-    <arg     if="$(arg use_icp_odom)" name="odometry_topic" value="$(arg icp_odometry)"/>
-    <arg     if="$(arg use_mrs_odom)" name="odometry_topic" value="$(arg mrs_odometry)"/>
-    <arg     if="$(arg use_switched_odom)" name="odometry_topic" value="$(arg switched_odometry)"/>
-
-
     <arg name="rc_in" default="mavros/rc/in"/>
 
     <param name="mass" type="double" value="$(arg mass)"/>
@@ -45,14 +28,14 @@
       <param name="debug" type="bool" value="$(arg debug)"/>
 
       <rosparam file="$(arg config_path)/trackers_manager.yaml" />
-      <rosparam file="$(find lidar_localization)/config/mpc_tracker.yaml" />
+      <rosparam file="$(find realsense_d435)/config/mpc_tracker.yaml" />
       <rosparam file="$(arg world_file)" />
 
       <param name="uav_name" value="$(arg uav_name)" />
       <param name="predicted_trajectory_topic" value="trackers_manager/mpc_tracker/predicted_trajectory" />
 
       <remap from="~/mpc_tracker/rc_in" to="$(arg rc_in)" />
-      <remap from="~odom" to="$(arg odometry_topic)"/>
+      <remap from="~odom" to="$(arg mrs_odometry)"/>
       <remap from="~cmd" to="position_cmd"/>
       <remap from="~output_data" to="quad_decode_msg/output_data"/>
 
@@ -62,7 +45,7 @@
     <node pkg="nodelet" type="nodelet" args="load so3_control/SO3ControlNodelet standalone_nodelet" name="so3_control" required="true" output="screen">
       <param name="mass" type="double" value="$(arg mass)"/>
       <rosparam file="$(arg config_path)/so3_control.yaml"/>
-      <remap from="~odom" to="$(arg odometry_topic)"/>
+      <remap from="~odom" to="$(arg mrs_odometry)"/>
       <remap from="~position_cmd" to="position_cmd"/>
       <remap from="~so3_cmd" to="so3_cmd"/>
       <remap from="~motors" to="motors"/>
@@ -84,7 +67,7 @@
     <!-- MAV-manager nodelet nodelet-->
     <node pkg="mav_manager" type="mav_manager_node" name="mav_manager_node" output="screen">
       <rosparam file="$(arg config_path)/mav_manager.yaml" />
-      <remap from="odom" to="$(arg odometry_topic)"/>
+      <remap from="odom" to="$(arg mrs_odometry)"/>
     </node>
 
     <!-- Coeficients of dynamics of the drone -->
@@ -101,7 +84,7 @@
       <param name="num_props" value="$(arg num_props)"/>
       <param name="convert_mavros_odom" value="true" />
 
-      <remap from="~odom" to="$(arg odometry_topic)"/>
+      <remap from="~odom" to="$(arg mrs_odometry)"/>
       <remap from="~so3_cmd" to="so3_cmd"/>
       <remap from="~imu" to="mavros/imu/data" />
       <remap from="~attitude_raw" to="mavros/setpoint_raw/attitude" />

@@ -33,4 +33,4 @@ sudo cp -v $SCRIPTPATH/../udev_rules/99-realsense-libusb.rules /etc/udev/rules.d
 echo "
 
 Reloading udev rules"
-udevadm control --reload-rules && udevadm trigger
+sudo udevadm control --reload-rules && udevadm trigger
