@@ -1,0 +1,6 @@
+main:
+  
+  uav_name_list: [uav1]
+
+uav1:
+  filename: /../../trajectories/trees_walls/trajectory_spline_long_48s_479pts_05mps.txt

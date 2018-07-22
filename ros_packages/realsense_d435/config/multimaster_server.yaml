@@ -1,0 +1,7 @@
+ignore_topics:  ['/rosout', '/rosout_agg', '/tf', '/clock']
+ignore_nodes : ['/gazebo', '/object_movement','/link_attacher_node']
+
+sync_nodes: []
+# list of topics and services that should be available between drones
+sync_topics: ['/*/trackers_manager/mpc_tracker/predicted_trajectory', '/*/rtk_gps/diagnostics', '/*/mrs_odometry/new_pose']
+sync_services: ['/*/trackers_manager/mpc_tracker/*']

@@ -1,0 +1,7 @@
+need_imu: false
+need_output_data: true
+
+# the threshold for max attitude angle (hover after that)
+use_attitude_safety_catch: false
+max_attitude_angle: 0.43
+takeoff_height: 1.0

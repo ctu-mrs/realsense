@@ -1,0 +1,6 @@
+main:
+  
+  uav_name_list: [uav1]
+
+uav1:
+  filename: /../../trajectories/trees/rectangle_80s_05mps.txt
