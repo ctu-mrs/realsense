@@ -194,7 +194,8 @@ Processing enabled by this node:
       <!-- Disable publishing of compressed and theora topics -->
     <group ns="color/image_raw">
       <rosparam param="disable_pub_plugins">
-      - 'image_transport/raw'
+      - 'image_transport/image_raw'
+      - 'image_transport/compressed'
       - 'image_transport/compressedDepth'
       - 'image_transport/theora'
       </rosparam>
@@ -202,6 +203,7 @@ Processing enabled by this node:
 
     <group ns="color/image_rect_color">
       <rosparam param="disable_pub_plugins">
+      - 'image_transport/image_raw'
       - 'image_transport/compressed'
       - 'image_transport/compressedDepth'
       - 'image_transport/theora'
@@ -217,7 +219,6 @@ Processing enabled by this node:
 
     <group ns="infra1/image_rect_raw">
       <rosparam param="disable_pub_plugins">
-      - 'image_transport/raw'
       - 'image_transport/compressed'
       - 'image_transport/compressedDepth'
       - 'image_transport/theora'
@@ -226,6 +227,7 @@ Processing enabled by this node:
 
     <group ns="infra2/image_rect_raw">
       <rosparam param="disable_pub_plugins">
+      - 'image_transport/image_raw'
       - 'image_transport/compressed'
       - 'image_transport/compressedDepth'
       - 'image_transport/theora'
