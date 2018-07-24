@@ -77,8 +77,8 @@ cvxgenMpc:
   maxVerticalDescendingAcceleration: 1.0
   maxVerticalDescendingJerk: 1.5
 
-  maxYawRate: 0.2
-  maxYawAcceleration: 1.0
+  maxYawRate: 0.5
+  maxYawAcceleration: 2.0
 
   maxAltitude: 10.0
   minAltitude: 1.0
