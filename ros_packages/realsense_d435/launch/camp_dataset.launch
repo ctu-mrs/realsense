@@ -195,7 +195,6 @@ Processing enabled by this node:
     <group ns="color/image_raw">
       <rosparam param="disable_pub_plugins">
       - 'image_transport/image_raw'
-      - 'image_transport/compressed'
       - 'image_transport/compressedDepth'
       - 'image_transport/theora'
       </rosparam>
