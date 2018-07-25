@@ -19,8 +19,13 @@ input=(
 '
 	'RealSense' 'sleep 3; roslaunch '"$PROJECT_NAME"' camp_dataset.launch student_name:='"$PROJECT_NAME"'
   '
-	'RosBag' 'sleep 5; roslaunch '"$PROJECT_NAME"' rosbag_record.launch student_name:='"$PROJECT_NAME"'
-'
+	'ResetExposure' 'sleep 5; roscd '"$PROJECT_NAME"' && ./../../scripts/reset_auto_exposure.sh
+  '
+	'FollowSetpoints' 'roslaunch setpoint_flier setpoint_flier_3.launch'
+	'LocalPosition' 'sleep 5; roslaunch local_position rtk_republisher.launch
+  '
+	'RosBag' 'sleep 10; roslaunch '"$PROJECT_NAME"' rosbag_record.launch student_name:='"$PROJECT_NAME"'
+  '
   'RTK' 'sleep 3; roslaunch nmea_navsat_driver navsat_driver.launch
 '
   'Diagnostics' 'sleep 3; rostopic echo /'"$UAV_NAME"'/rtk_gps/diagnostics
