@@ -1,3 +1,6 @@
 [submodule "realsense"]
 	path = realsense
 	url = git@github.com:intel-ros/realsense.git
+[submodule "ros_packages/realsense"]
+	path = ros_packages/realsense
+	url = git@github.com:intel-ros/realsense.git
