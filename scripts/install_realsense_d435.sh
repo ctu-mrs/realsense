@@ -12,6 +12,9 @@ sudo apt-key adv --keyserver keys.gnupg.net --recv-key C8B3A55A6F3EFCDE
 # Refresh the list of repositories and packages available
 sudo apt-get update
 
+# Install required launch file
+sudo apt-get install ros-melodic-rgbd-launch
+
 # In order to run demos install
 sudo apt-get install librealsense2-dkms
 sudo apt-get install librealsense2-utils
