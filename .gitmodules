@@ -4,6 +4,3 @@
 [submodule "ros_packages/realsense"]
 	path = ros_packages/realsense
 	url = https://github.com/intel-ros/realsense.git
-[submodule "ros_packages/librealsense2"]
-	path = ros_packages/librealsense2
-	url = https://github.com/IntelRealSense/librealsense.git

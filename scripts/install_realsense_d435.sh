@@ -15,6 +15,9 @@ sudo apt-get update
 # Install required launch file
 sudo apt-get install ros-melodic-rgbd-launch
 
+# Install glfw library
+sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+
 # In order to run demos install
 sudo apt-get install librealsense2-dkms
 sudo apt-get install librealsense2-utils
