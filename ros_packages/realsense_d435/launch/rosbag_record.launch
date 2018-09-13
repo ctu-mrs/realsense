@@ -7,7 +7,7 @@
   <group ns="$(arg uav_name)">
 
     <!-- !!! MAKE SURE THAT CAMERA TOPICS ARE SET PROPERLY !!! -->
-    <node pkg="rosbag" type="record" name="rosbag_record" args="-o /home/$(optenv USER mrs)/bag_files/$(arg student_name)/ -a -x /$(arg uav_name)/mobius/image_raw|/$(arg uav_name)/mobius/image_raw/compressed/(.*)|/$(arg uav_name)/mobius/image_raw/compressedDepth(.*)|/$(arg uav_name)/mobius/image_raw/theora(.*)|/$(arg uav_name)/bluefox/image_raw|/$(arg uav_name)/bluefox/image_raw/compressed/(.*)|/$(arg uav_name)/bluefox/image_raw/compressedDepth(.*)|/$(arg uav_name)/bluefox/image_raw/theora(.*)|/$(arg uav_name)/rs_d435/color/image_raw|/$(arg uav_name)/rs_d435/infra2/image_rect_raw|/$(arg uav_name)/rs_d435/color/image_rect_color"/>   
+    <node pkg="rosbag" type="record" name="rosbag_record" args="-o /home/$(optenv USER mrs)/bag_files/$(arg student_name)/ -a -x /$(arg uav_name)/mobius/image_raw|/$(arg uav_name)/mobius/image_raw/compressed/(.*)|/$(arg uav_name)/mobius/image_raw/compressedDepth(.*)|/$(arg uav_name)/mobius/image_raw/theora(.*)|/$(arg uav_name)/bluefox/image_raw|/$(arg uav_name)/bluefox/image_raw/compressed/(.*)|/$(arg uav_name)/bluefox/image_raw/compressedDepth(.*)|/$(arg uav_name)/bluefox/image_raw/theora(.*)|/$(arg uav_name)/rs_d435/color/image_raw|/$(arg uav_name)/rs_d435/infra1/image_rect_raw|/$(arg uav_name)/rs_d435/depth/image_rect_raw||/$(arg uav_name)/rs_d435/infra2/image_rect_raw|/$(arg uav_name)/rs_d435/aligned_depth_to_infra1/image_raw|/$(arg uav_name)/rs_d435/aligned_depth_to_infra2/image_raw"/>   
 
   </group>
 </launch>
