@@ -1,6 +1,0 @@
-main:
-  
-  uav_name_list: [uav5]
-
-uav1:
-  filename: /../../trajectories/rectangle.txt
