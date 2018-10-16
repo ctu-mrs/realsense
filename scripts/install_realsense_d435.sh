@@ -19,12 +19,14 @@ sudo apt-get install ros-melodic-rgbd-launch
 sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
 # In order to run demos install
-sudo apt-get install librealsense2-dkms
-sudo apt-get install librealsense2-utils
+# sudo apt-get install librealsense2-dkms
+# sudo apt-get install librealsense2-utils
 
 # Developers shall install additional packages
-sudo apt-get install librealsense2-dev
-sudo apt-get install librealsense2-dbg
+# sudo apt-get install librealsense2-dev
+# sudo apt-get install librealsense2-dbg
+
+sudo apt-get install librealsense2=2.16.0-0\~realsense0.85 librealsense2-dev=2.16.0-0\~realsense0.85 librealsense2-dbg=2.16.0-0\~realsense0.85 librealsense2-utils=2.16.0-0\~realsense0.85
 
 # Verify that the kernel is updated
 modinfo uvcvideo | grep "version:"
