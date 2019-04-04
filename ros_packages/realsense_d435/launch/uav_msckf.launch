@@ -76,7 +76,7 @@ Processing enabled by this node:
   <arg name="enable_pointcloud"   default="false"/>
   <arg name="enable_sync"         default="true"/>
   <arg name="align_depth"         default="true"/>
-
+  <arg name="unite_imu_method"    default="copy"/>
   <!-- rgbd_launch specific arguments -->
 
   <!-- Arguments for remapping all device namespaces -->
@@ -144,6 +144,7 @@ Processing enabled by this node:
         <arg name="color_fps"                value="$(arg color_fps)"/>
         <arg name="gyro_fps"                 value="$(arg gyro_fps)"/>
         <arg name="accel_fps"                value="$(arg accel_fps)"/>
+        <arg name="unite_imu_method"         value="$(arg unite_imu_method)"/>
       </include>
 
       <!-- RGB processing -->
