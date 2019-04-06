@@ -116,6 +116,7 @@ Processing enabled by this node:
         <arg name="tf_prefix"                value="$(arg tf_prefix)"/>
         <arg name="serial_no"                value="$(arg serial_no)"/>
         <arg name="json_file_path"           value="$(arg json_file_path)"/>
+        <arg name="initial_reset"            value="$(arg initial_reset)"/>
 
         <arg name="enable_pointcloud"        value="$(arg enable_pointcloud)"/>
         <arg name="enable_sync"              value="$(arg enable_sync)"/>
