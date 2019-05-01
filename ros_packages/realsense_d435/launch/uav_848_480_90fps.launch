@@ -46,7 +46,7 @@ Processing enabled by this node:
   <!-- Camera device specific arguments -->
 
   <arg name="serial_no"           default=""/>
-  <arg name="json_file_path"      default="/home/janbednar/workspace/src/realsense_d435/ros_packages/realsense_d435/config/848_480_90_no_laser.json"/>
+  <arg name="json_file_path"      default="$(find realsense_d435)/config/848_480_90_no_laser.json"/>
 
   <arg name="fisheye_width"       default="1920"/>
   <arg name="fisheye_height"      default="1080"/>
