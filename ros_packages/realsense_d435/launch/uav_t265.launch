@@ -19,7 +19,7 @@
 
   <arg name="enable_sync"           default="false"/>
 
-  <arg name="linear_accel_cov"      default="0.01"/>
+  <arg name="linear_accel_cov"      default="1.00"/>
   <arg name="initial_reset"         default="false"/>
   <arg name="unite_imu_method"      default=""/>
 
@@ -49,4 +49,5 @@
       </include>
     </group>
   </group>
+
 </launch>
