@@ -43,8 +43,6 @@ Processing enabled by this node:
   <arg name="manager"             default="realsense2_camera_manager"/>
   <arg name="initial_reset"       default="true"/>
 
-  <arg name="compressed_jpeg_quality" default="95" />
-
   <!-- Camera device specific arguments -->
 
   <arg name="serial_no"           default=""/>
@@ -149,9 +147,6 @@ Processing enabled by this node:
         <arg name="gyro_fps"                 value="$(arg gyro_fps)"/>
         <arg name="accel_fps"                value="$(arg accel_fps)"/>
         <arg name="unite_imu_method"         value="$(arg unite_imu_method)"/>
-
-        <arg name="compressed_jpeg_quality"  value="$(arg compressed_jpeg_quality)"/>
-
       </include>
 
       <!-- RGB processing -->

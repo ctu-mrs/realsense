@@ -51,9 +51,6 @@ Processing enabled by this node:
   <arg name="fisheye_width"       default="1920"/>
   <arg name="fisheye_height"      default="1080"/>
   <arg name="enable_fisheye"      default="false"/>
-  <arg name="fisheye_width"       default="1920"/>
-  <arg name="fisheye_height"      default="1080"/>
-  <arg name="enable_fisheye"      default="false"/>
 
   <arg name="depth_width"         default="1280"/>
   <arg name="depth_height"        default="720"/>
