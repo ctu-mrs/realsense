@@ -26,7 +26,8 @@ sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 # sudo apt-get install librealsense2-dev
 # sudo apt-get install librealsense2-dbg
 
-sudo apt-get install librealsense2=2.16.0-0\~realsense0.85 librealsense2-dev=2.16.0-0\~realsense0.85 librealsense2-dbg=2.16.0-0\~realsense0.85 librealsense2-utils=2.16.0-0\~realsense0.85
+sudo apt-get install librealsense2 librealsense2-dev librealsense2-dbg librealsense2-utils
+# sudo apt-get install librealsense2=2.16.0-0\~realsense0.85 librealsense2-dev=2.16.0-0\~realsense0.85 librealsense2-dbg=2.16.0-0\~realsense0.85 librealsense2-utils=2.16.0-0\~realsense0.85
 
 # Verify that the kernel is updated
 modinfo uvcvideo | grep "version:"
