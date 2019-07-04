@@ -3,6 +3,10 @@
 # Get path to script
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
+# Pull the repository to initialize subomdules
+cd $SCRIPTPATH
+git pull
+
 # Add Intel server to the list of repositories
 echo 'deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo xenial main' | sudo tee /etc/apt/sources.list.d/realsense-public.list
 
@@ -18,15 +22,7 @@ sudo apt-get install ros-melodic-rgbd-launch
 # Install glfw library
 sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
-# In order to run demos install
-# sudo apt-get install librealsense2-dkms
-# sudo apt-get install librealsense2-utils
-
-# Developers shall install additional packages
-# sudo apt-get install librealsense2-dev
-# sudo apt-get install librealsense2-dbg
-
-sudo apt-get install librealsense2 librealsense2-dev librealsense2-dbg librealsense2-utils
+sudo apt-get install librealsense2 librealsense2-dkms librealsense2-dev librealsense2-dbg librealsense2-utils
 # sudo apt-get install librealsense2=2.16.0-0\~realsense0.85 librealsense2-dev=2.16.0-0\~realsense0.85 librealsense2-dbg=2.16.0-0\~realsense0.85 librealsense2-utils=2.16.0-0\~realsense0.85
 
 # Verify that the kernel is updated
