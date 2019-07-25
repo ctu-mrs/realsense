@@ -14,15 +14,15 @@ echo 'deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo xenial mai
 sudo apt-key adv --keyserver keys.gnupg.net --recv-key C8B3A55A6F3EFCDE
 
 # Refresh the list of repositories and packages available
-sudo apt-get update
+sudo apt update
 
 # Install required launch file
-sudo apt-get install ros-melodic-rgbd-launch
+sudo apt -y install ros-melodic-rgbd-launch
 
 # Install glfw library
-sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+sudo apt -y install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
-sudo apt-get install librealsense2 librealsense2-dkms librealsense2-dev librealsense2-dbg librealsense2-utils
+sudo apt -y install librealsense2 librealsense2-dkms librealsense2-dev librealsense2-dbg librealsense2-utils
 # sudo apt-get install librealsense2=2.16.0-0\~realsense0.85 librealsense2-dev=2.16.0-0\~realsense0.85 librealsense2-dbg=2.16.0-0\~realsense0.85 librealsense2-utils=2.16.0-0\~realsense0.85
 
 # Verify that the kernel is updated
