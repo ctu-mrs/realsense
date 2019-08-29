@@ -60,9 +60,9 @@ Processing enabled by this node:
 
   <arg name="infra_width"        default="1280"/>
   <arg name="infra_height"       default="720"/>
-  <arg name="enable_infra1"       default="true"/>
+  <arg name="enable_infra1"       default="false"/>
 
-  <arg name="enable_infra2"       default="true"/>
+  <arg name="enable_infra2"       default="false"/>
 
   <arg name="color_width"         default="1280"/>
   <arg name="color_height"        default="720"/>
