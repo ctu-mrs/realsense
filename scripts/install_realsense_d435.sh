@@ -14,16 +14,24 @@ sudo add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/
 # Refresh the list of repositories and packages available
 sudo apt update
 
+# Install required package for ROS wrapper
+sudo apt -y install ros-melodic-ddynamic-reconfigure
+
 # Install required launch file
 sudo apt -y install ros-melodic-rgbd-launch
 
 # Install glfw library
 sudo apt -y install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
+#Firstly uninstall all previous versions - KEEP THE UNINSTALL ORDER
+sudo apt -y purge librealsense2-dev librealsense2-dbg librealsense2-utils librealsense2-gl
+sudo apt -y purge librealsense2 librealsense2-dkms
+sudo apt -y purge librealsense2-udev-rules
+
+# Install librealsense in version 2.25.0
 # sudo apt -y install librealsense2 librealsense2-dkms librealsense2-dev librealsense2-dbg librealsense2-utils
 # sudo apt-get install librealsense2=2.16.0-0\~realsense0.85 librealsense2-dev=2.16.0-0\~realsense0.85 librealsense2-dbg=2.16.0-0\~realsense0.85 librealsense2-utils=2.16.0-0\~realsense0.85
-# sudo apt -y install librealsense2=2.25.0-0\~realsense0.1332 librealsense2-dkms=2.25.0-0\~realsense0.1332 librealsense2-utils=2.25.0-0\~realsense0.1332 librealsense2-dev=2.25.0-0\~realsense0.1332 librealsense2-dbg=2.25.0-0\~realsense0.1332
-sudo apt -y install librealsense2-dkms=2.25.0-0\~realsense0.1332 librealsense2-utils=2.25.0-0\~realsense0.1332 
+sudo apt -y install librealsense2-dkms=1.3.6-0ubuntu0 librealsense2-utils=2.25.0-0\~realsense0.1332 librealsense2=2.25.0-0\~realsense0.1332 librealsense2-gl=2.25.0-0\~realsense0.1332 librealsense2-udev-rules=2.25.0-0\~realsense0.1332  librealsense2-dev=2.25.0-0\~realsense0.1332 librealsense2-dbg=2.25.0-0\~realsense0.1332
 
 # Verify that the kernel is updated
 modinfo uvcvideo | grep "version:"
