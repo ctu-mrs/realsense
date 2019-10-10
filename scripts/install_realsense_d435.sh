@@ -20,8 +20,9 @@ sudo apt -y install ros-melodic-rgbd-launch
 # Install glfw library
 sudo apt -y install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
-sudo apt -y install librealsense2 librealsense2-dkms librealsense2-dev librealsense2-dbg librealsense2-utils
+# sudo apt -y install librealsense2 librealsense2-dkms librealsense2-dev librealsense2-dbg librealsense2-utils
 # sudo apt-get install librealsense2=2.16.0-0\~realsense0.85 librealsense2-dev=2.16.0-0\~realsense0.85 librealsense2-dbg=2.16.0-0\~realsense0.85 librealsense2-utils=2.16.0-0\~realsense0.85
+sudo apt -y install librealsense2-dkms=2.25.0-0\~realsense0.1332 librealsense2-utils=2.25.0-0\~realsense0.1332
 
 # Verify that the kernel is updated
 modinfo uvcvideo | grep "version:"
