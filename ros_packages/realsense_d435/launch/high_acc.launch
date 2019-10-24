@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,30 +19,31 @@ A launch file, derived from rgbd_launch and customized for Realsense ROS driver,
 to publish XYZRGB point cloud like an OpenNI camera.
 
 To launch Realsense with software registeration (ROS Image Pipeline and rgbd_launch):
-    $ roslaunch realsense2_camera rs_rgbd.launch
+$ roslaunch realsense2_camera rs_rgbd.launch
 Processing enabled by ROS driver:
-    # depth rectification
+# depth rectification
 Processing enabled by this node:
-    # rgb rectification
-    # depth registeration
-    # pointcloud_xyzrgb generation
+# rgb rectification
+# depth registeration
+# pointcloud_xyzrgb generation
 
 To launch Realsense with hardware registeration (ROS Realsense depth alignment):
-    $ roslaunch realsense2_camera rs_rgbd.launch align_depth:=true
+$ roslaunch realsense2_camera rs_rgbd.launch align_depth:=true
 Processing enabled by ROS driver:
-    # depth rectification
-    # depth registration
+# depth rectification
+# depth registration
 Processing enabled by this node:
-    # rgb rectification
-    # pointcloud_xyzrgb generation
+# rgb rectification
+# pointcloud_xyzrgb generation
 -->
 
 <launch>
-  <arg name="uav_name"           default="$(optenv UAV_NAME uav)"/>
+  <arg name="uav_name"            default="$(optenv UAV_NAME uav)"/>
   <arg name="namespace"           default="rs_d435"/>
   <arg name="manager"             default="realsense2_camera_manager"/>
+  <arg name="initial_reset"       default="true"/>
 
-  <!-- Camera device specific arguments -->
+    <!-- Camera device specific arguments -->
 
   <arg name="serial_no"           default=""/>
   <arg name="json_file_path"      default="$(find realsense_d435)/config/realsense-high-acc.json"/>
@@ -55,8 +56,8 @@ Processing enabled by this node:
   <arg name="depth_height"        default="720"/>
   <arg name="enable_depth"        default="true"/>
 
-  <arg name="infra_width"        default="1280"/>
-  <arg name="infra_height"       default="720"/>
+  <arg name="infra_width"         default="1280"/>
+  <arg name="infra_height"        default="720"/>
   <arg name="enable_infra1"       default="true"/>
 
   <arg name="enable_infra2"       default="false"/>
@@ -67,7 +68,7 @@ Processing enabled by this node:
 
   <arg name="fisheye_fps"         default="30"/>
   <arg name="depth_fps"           default="30"/>
-  <arg name="infra_fps"          default="30"/>
+  <arg name="infra_fps"           default="30"/>
   <arg name="color_fps"           default="30"/>
   <arg name="gyro_fps"            default="1000"/>
   <arg name="accel_fps"           default="1000"/>
@@ -78,9 +79,9 @@ Processing enabled by this node:
   <arg name="enable_sync"         default="true"/>
   <arg name="align_depth"         default="true"/>
 
-  <!-- rgbd_launch specific arguments -->
+    <!-- rgbd_launch specific arguments -->
 
-  <!-- Arguments for remapping all device namespaces -->
+    <!-- Arguments for remapping all device namespaces -->
   <arg name="rgb"                             default="color" />
   <arg name="ir"                              default="infra1" />
   <arg name="depth"                           default="depth" />
@@ -90,11 +91,11 @@ Processing enabled by this node:
   <arg name="depth_registered_filtered"       default="$(arg depth_registered)" />
   <arg name="projector"                       default="projector" />
 
-  <!-- Disable bond topics by default -->
+    <!-- Disable bond topics by default -->
   <arg name="bond"                            default="false" />
   <arg name="respawn"                         default="$(arg bond)" />
 
-  <!-- Processing Modules -->
+    <!-- Processing Modules -->
   <arg name="rgb_processing"                  default="true"/>
   <arg name="debayer_processing"              default="false" />
   <arg name="ir_processing"                   default="true"/>
@@ -116,6 +117,7 @@ Processing enabled by this node:
         <arg name="serial_no"                value="$(arg serial_no)"/>
         <arg name="json_file_path"           value="$(arg json_file_path)"/>
 
+        <arg name="initial_reset"            value="$(arg initial_reset)"/>
         <arg name="enable_pointcloud"        value="$(arg enable_pointcloud)"/>
         <arg name="enable_sync"              value="$(arg enable_sync)"/>
         <arg name="align_depth"              value="$(arg align_depth)"/>
@@ -132,104 +134,104 @@ Processing enabled by this node:
         <arg name="color_height"             value="$(arg color_height)"/>
         <arg name="enable_color"             value="$(arg enable_color)"/>
 
-        <arg name="infra_width"             value="$(arg infra_width)"/>
-        <arg name="infra_height"            value="$(arg infra_height)"/>
+        <arg name="infra_width"              value="$(arg infra_width)"/>
+        <arg name="infra_height"             value="$(arg infra_height)"/>
         <arg name="enable_infra1"            value="$(arg enable_infra1)"/>
 
         <arg name="enable_infra2"            value="$(arg enable_infra2)"/>
 
         <arg name="fisheye_fps"              value="$(arg fisheye_fps)"/>
         <arg name="depth_fps"                value="$(arg depth_fps)"/>
-        <arg name="infra_fps"               value="$(arg infra_fps)"/>
+        <arg name="infra_fps"                value="$(arg infra_fps)"/>
         <arg name="color_fps"                value="$(arg color_fps)"/>
         <arg name="gyro_fps"                 value="$(arg gyro_fps)"/>
         <arg name="accel_fps"                value="$(arg accel_fps)"/>
 
-        <arg name="tf_prefix"               value="$(arg tf_prefix)"/>
+        <arg name="tf_prefix"                value="$(arg tf_prefix)"/>
       </include>
 
       <!-- RGB processing -->
       <include if="$(arg rgb_processing)"
         file="$(find rgbd_launch)/launch/includes/rgb.launch.xml">
-        <arg name="manager"                       value="$(arg manager)" />
-        <arg name="respawn"                       value="$(arg respawn)" />
-        <arg name="rgb"                           value="$(arg rgb)" />
-        <arg name="debayer_processing"            value="$(arg debayer_processing)" />
-      </include>
+      <arg name="manager"                       value="$(arg manager)" />
+      <arg name="respawn"                       value="$(arg respawn)" />
+      <arg name="rgb"                           value="$(arg rgb)" />
+      <arg name="debayer_processing"            value="$(arg debayer_processing)" />
+    </include>
 
-      <group if="$(eval depth_registered_processing and sw_registered_processing)">
-        <node pkg="nodelet" type="nodelet" name="register_depth"
-          args="load depth_image_proc/register $(arg manager) $(arg bond)" respawn="$(arg respawn)">
-          <remap from="rgb/camera_info"             to="$(arg rgb)/camera_info" />
-          <remap from="depth/camera_info"           to="$(arg depth)/camera_info" />
-          <remap from="depth/image_rect"            to="$(arg depth)/image_rect_raw" />
-          <remap from="depth_registered/image_rect" to="$(arg depth_registered)/sw_registered/image_rect_raw" />
-        </node>
+    <group if="$(eval depth_registered_processing and sw_registered_processing)">
+      <node pkg="nodelet" type="nodelet" name="register_depth"
+        args="load depth_image_proc/register $(arg manager) $(arg bond)" respawn="$(arg respawn)">
+      <remap from="rgb/camera_info"             to="$(arg rgb)/camera_info" />
+      <remap from="depth/camera_info"           to="$(arg depth)/camera_info" />
+      <remap from="depth/image_rect"            to="$(arg depth)/image_rect_raw" />
+      <remap from="depth_registered/image_rect" to="$(arg depth_registered)/sw_registered/image_rect_raw" />
+    </node>
 
-        <!-- Publish registered XYZRGB point cloud with software registered input -->
-        <node pkg="nodelet" type="nodelet" name="points_xyzrgb_sw_registered"
-          args="load depth_image_proc/point_cloud_xyzrgb $(arg manager) $(arg bond)" respawn="$(arg respawn)">
-          <remap from="rgb/image_rect_color"        to="$(arg rgb)/image_rect_color" />
-          <remap from="rgb/camera_info"             to="$(arg rgb)/camera_info" />
-          <remap from="depth_registered/image_rect" to="$(arg depth_registered_filtered)/sw_registered/image_rect_raw" />
-          <remap from="depth_registered/points"     to="$(arg depth_registered)/points" />
-        </node>
-      </group>
+    <!-- Publish registered XYZRGB point cloud with software registered input -->
+    <node pkg="nodelet" type="nodelet" name="points_xyzrgb_sw_registered"
+      args="load depth_image_proc/point_cloud_xyzrgb $(arg manager) $(arg bond)" respawn="$(arg respawn)">
+    <remap from="rgb/image_rect_color"        to="$(arg rgb)/image_rect_color" />
+    <remap from="rgb/camera_info"             to="$(arg rgb)/camera_info" />
+    <remap from="depth_registered/image_rect" to="$(arg depth_registered_filtered)/sw_registered/image_rect_raw" />
+    <remap from="depth_registered/points"     to="$(arg depth_registered)/points" />
+  </node>
+</group>
 
-      <group if="$(eval depth_registered_processing and hw_registered_processing)">
-        <!-- Publish registered XYZRGB point cloud with hardware registered input (ROS Realsense depth alignment) -->
-        <node pkg="nodelet" type="nodelet" name="points_xyzrgb_hw_registered"
-          args="load depth_image_proc/point_cloud_xyzrgb $(arg manager) $(arg bond)" respawn="$(arg respawn)">
-          <remap from="rgb/image_rect_color"        to="$(arg rgb)/image_rect_color" />
-          <remap from="rgb/camera_info"             to="$(arg rgb)/camera_info" />
-          <remap from="depth_registered/image_rect" to="$(arg depth_registered)/image_raw" />
-          <remap from="depth_registered/points"     to="$(arg depth_registered_pub)/points" />
-        </node>
+<group if="$(eval depth_registered_processing and hw_registered_processing)">
+  <!-- Publish registered XYZRGB point cloud with hardware registered input (ROS Realsense depth alignment) -->
+  <node pkg="nodelet" type="nodelet" name="points_xyzrgb_hw_registered"
+    args="load depth_image_proc/point_cloud_xyzrgb $(arg manager) $(arg bond)" respawn="$(arg respawn)">
+  <remap from="rgb/image_rect_color"        to="$(arg rgb)/image_rect_color" />
+  <remap from="rgb/camera_info"             to="$(arg rgb)/camera_info" />
+  <remap from="depth_registered/image_rect" to="$(arg depth_registered)/image_raw" />
+  <remap from="depth_registered/points"     to="$(arg depth_registered_pub)/points" />
+</node>
       </group>
 
       <!-- Disable publishing of compressed and theora topics -->
-    <group ns="color/image_raw">
-      <rosparam param="disable_pub_plugins">
+      <group ns="color/image_raw">
+        <rosparam param="disable_pub_plugins">
       - 'image_transport/image_raw'
       - 'image_transport/compressedDepth'
       - 'image_transport/theora'
-      </rosparam>
-    </group>
+        </rosparam>
+      </group>
 
-    <group ns="color/image_rect_color">
-      <rosparam param="disable_pub_plugins">
+      <group ns="color/image_rect_color">
+        <rosparam param="disable_pub_plugins">
       - 'image_transport/image_raw'
       - 'image_transport/compressed'
       - 'image_transport/compressedDepth'
       - 'image_transport/theora'
-      </rosparam>
-    </group>
+        </rosparam>
+      </group>
       <group ns="depth/image_rect_raw">
         <rosparam param="disable_pub_plugins">
       - 'image_transport/compressed'
       - 'image_transport/compressedDepth'
       - 'image_transport/theora'
-      </rosparam>
-    </group>
+        </rosparam>
+      </group>
 
-    <group ns="infra1/image_rect_raw">
-      <rosparam param="disable_pub_plugins">
+      <group ns="infra1/image_rect_raw">
+        <rosparam param="disable_pub_plugins">
       - 'image_transport/compressed'
       - 'image_transport/compressedDepth'
       - 'image_transport/theora'
-      </rosparam>
-    </group>
+        </rosparam>
+      </group>
 
-    <group ns="infra2/image_rect_raw">
-      <rosparam param="disable_pub_plugins">
+      <group ns="infra2/image_rect_raw">
+        <rosparam param="disable_pub_plugins">
       - 'image_transport/image_raw'
       - 'image_transport/compressed'
       - 'image_transport/compressedDepth'
       - 'image_transport/theora'
-      </rosparam>
-    </group>
+        </rosparam>
+      </group>
 
+    </group>
   </group>
-</group>
 
 </launch>
