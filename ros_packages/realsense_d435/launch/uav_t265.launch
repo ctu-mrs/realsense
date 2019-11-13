@@ -3,7 +3,8 @@
   <arg name="serial_no"           default=""/>
   <arg name="json_file_path"      default=""/>
   <arg name="camera"              default="rs_t265"/>
-  <arg name="tf_prefix"           default="$(arg camera)"/>
+  <arg name="namespace"           default="rs_d435"/>
+  <arg name="tf_prefix"           default="$(arg uav_name)/$(arg namespace)"/>
 
   <arg name="fisheye_width"       default="848"/>
   <arg name="fisheye_height"      default="800"/>
