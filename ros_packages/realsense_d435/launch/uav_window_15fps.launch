@@ -69,9 +69,9 @@ Processing enabled by this node:
   <arg name="enable_color"        default="true"/>
 
   <arg name="fisheye_fps"         default="30"/>
-  <arg name="depth_fps"           default="30"/>
+  <arg name="depth_fps"           default="15"/>
   <arg name="infra_fps"          default="30"/>
-  <arg name="color_fps"           default="30"/>
+  <arg name="color_fps"           default="15"/>
   <arg name="gyro_fps"            default="200"/>
   <arg name="accel_fps"           default="63"/>
 
