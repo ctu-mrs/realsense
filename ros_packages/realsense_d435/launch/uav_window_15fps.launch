@@ -40,7 +40,7 @@ Processing enabled by this node:
 <launch>
   <arg name="uav_name"            default="$(optenv UAV_NAME uav)"/>
   <arg name="namespace"           default="rs_d435"/>
-  <arg name="tf_prefix"           default="$(arg namespace)_$(arg uav_name)"/>
+  <arg name="tf_prefix"           default="$(arg uav_name)/$(arg namespace)"/>
   <arg name="manager"             default="realsense2_camera_manager"/>
   <arg name="initial_reset"       default="true"/>
 
@@ -69,9 +69,9 @@ Processing enabled by this node:
   <arg name="enable_color"        default="true"/>
 
   <arg name="fisheye_fps"         default="30"/>
-  <arg name="depth_fps"           default="30"/>
+  <arg name="depth_fps"           default="15"/>
   <arg name="infra_fps"          default="30"/>
-  <arg name="color_fps"           default="30"/>
+  <arg name="color_fps"           default="15"/>
   <arg name="gyro_fps"            default="200"/>
   <arg name="accel_fps"           default="63"/>
 
@@ -113,7 +113,7 @@ Processing enabled by this node:
 
 
       <!-- Launch the camera device nodelet-->
-      <include file="$(find realsense_d435)/launch/includes/nodelet.launch.xml">
+      <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
         <arg name="manager"                  value="$(arg manager)"/>
         <arg name="tf_prefix"                value="$(arg tf_prefix)"/>
         <arg name="serial_no"                value="$(arg serial_no)"/>
