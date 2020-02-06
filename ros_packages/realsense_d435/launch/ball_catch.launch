@@ -76,7 +76,7 @@ Processing enabled by this node:
 
   <arg name="enable_pointcloud"   default="false"/>
   <arg name="enable_sync"         default="true"/>
-  <arg name="align_depth"         default="true"/>
+  <arg name="align_depth"         default="false"/>
 
     <!-- rgbd_launch specific arguments -->
 
@@ -212,11 +212,8 @@ Processing enabled by this node:
 
       <group ns="depth/image_raw">
         <rosparam param="disable_pub_plugins">
-      - 'image_transport/raw'
-      - 'image_transport/image_raw'
       - 'image_transport/image_rect_raw'
       - 'image_transport/compressed'
-      - 'image_transport/compressedDepth'
       - 'image_transport/theora'
       - 'image_transport/h264'
         </rosparam>
@@ -246,6 +243,7 @@ Processing enabled by this node:
       <group ns="infra2/image_rect_raw">
         <rosparam param="disable_pub_plugins">
       - 'image_transport'
+      - 'image_transport/raw'
       - 'image_transport/image_raw'
       - 'image_transport/image_rect_raw'
       - 'image_transport/compressed'
@@ -258,6 +256,7 @@ Processing enabled by this node:
       <group ns="aligned_depth_to_infra1/image_raw">
         <rosparam param="disable_pub_plugins">
       - 'image_transport'
+      - 'image_transport/raw'
       - 'image_transport/image_raw'
       - 'image_transport/image_rect_raw'
       - 'image_transport/compressed'
@@ -269,8 +268,11 @@ Processing enabled by this node:
 
       <group ns="aligned_depth_to_color/image_raw">
         <rosparam param="disable_pub_plugins">
+      - 'image_transport'
+      - 'image_transport/image_raw'
       - 'image_transport/image_rect_raw'
       - 'image_transport/compressed'
+      - 'image_transport/compressedDepth'
       - 'image_transport/theora'
       - 'image_transport/h264'
         </rosparam>
