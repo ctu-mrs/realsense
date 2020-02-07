@@ -107,11 +107,10 @@ Processing enabled by this node:
   <arg name="sw_registered_processing"        default="false" if="$(arg align_depth)" />
 
   <group ns="$(arg uav_name)">
-    <group ns="$(arg namespace)">
-
 
       <!-- Launch the camera device nodelet-->
       <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
+        <arg name="namespace"                value="rs_d435"/>
         <arg name="manager"                  value="$(arg manager)"/>
         <arg name="serial_no"                value="$(arg serial_no)"/>
         <arg name="json_file_path"           value="$(arg json_file_path)"/>
@@ -276,7 +275,6 @@ Processing enabled by this node:
         </rosparam>
       </group>
 
-    </group>
   </group>
 
 </launch>
