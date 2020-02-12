@@ -8,3 +8,6 @@
 
 # Runtime-python
 *.pyc
+
+.gitman
+.gitman.old
