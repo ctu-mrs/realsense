@@ -1,11 +1,21 @@
 location: .gitman
 sources:
-- name: realsense2_camera
+- name: realsense
   type: git
   repo: git@nuc7:uav/realsense2_camera
   sparse_paths:
   -
   rev: master
+  link: ros_packages/realsense
+  scripts:
+  - git submodule update --init --recursive
+sources_locked:
+- name: realsense
+  type: git
+  repo: git@nuc7:uav/realsense2_camera
+  sparse_paths:
+  -
+  rev: f548ca5e43229d22c75ac3f994f9e4d85debf4d8
   link: ros_packages/realsense
   scripts:
   - git submodule update --init --recursive
