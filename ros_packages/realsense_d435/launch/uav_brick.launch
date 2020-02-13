@@ -6,6 +6,8 @@
   <arg name="external_manager"    default="false"/>
   <arg name="initial_reset"       default="true"/>
 
+  <arg name="node_start_delay"       default="0" />
+
   <!-- Camera device specific arguments -->
 
   <arg name="serial_no"           default=""/>
@@ -73,7 +75,10 @@
 
       <!-- Launch the camera device nodelet-->
       <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
+
         <arg name="namespace"         value="$(arg namespace)"/>
+
+        <arg name="node_start_delay"         value="$(arg node_start_delay)"/>
 
         <arg name="external_manager"         value="$(arg external_manager)"/>
         <arg name="manager"                  value="$(arg manager)"/>
