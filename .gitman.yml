@@ -15,7 +15,7 @@ sources_locked:
   repo: git@nuc7:uav/realsense2_camera
   sparse_paths:
   -
-  rev: f89f256b3dc8faabee16d08a1b7f229ef4ddb226
+  rev: 58eb9c8251b0f54de4002dd68b7088b82bcc1d66
   link: ros_packages/realsense
   scripts:
   - git submodule update --init --recursive
