@@ -178,7 +178,7 @@ Processing enabled by this node:
         <node pkg="nodelet" type="nodelet" name="points_xyz_hw_registered"
           args="load depth_image_proc/point_cloud_xyz $(arg manager) $(arg bond)" respawn="$(arg respawn)">
           <remap from="image_rect" to="rs_d435/depth/image_rect_raw" />
-          <remap from="points"     to="/points" />
+          <remap from="points"     to="rs_d435/depth/points" />
         </node>
       <!-- </group> -->
 
