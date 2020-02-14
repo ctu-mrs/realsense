@@ -64,9 +64,9 @@ Processing enabled by this node:
 
   <arg name="enable_infra2"       default="false"/>
 
-  <arg name="color_width"         default="1280"/>
-  <arg name="color_height"        default="720"/>
-  <arg name="enable_color"        default="false"/>
+  <arg name="color_width"         default="640"/>
+  <arg name="color_height"        default="480"/>
+  <arg name="enable_color"        default="true"/>
 
   <arg name="fisheye_fps"         default="30"/>
   <arg name="depth_fps"           default="30"/>
@@ -185,7 +185,7 @@ Processing enabled by this node:
     <!-- Disable publishing of compressed and theora topics -->
     <group ns="color/image_raw">
       <rosparam param="disable_pub_plugins">
-      - 'image_transport/image_raw'
+      <!-- - 'image_transport/image_raw' -->
       - 'image_transport/compressed'
       - 'image_transport/compressedDepth'
       - 'image_transport/theora'
