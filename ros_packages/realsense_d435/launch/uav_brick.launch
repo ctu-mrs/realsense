@@ -134,9 +134,11 @@
       <!-- - 'image_transport/theora' -->
       </rosparam>
     </group>
+
     <group ns="depth/image_rect_raw">
       <rosparam param="disable_pub_plugins">
       - 'image_transport/compressed'
+      - 'image_transport/compressedDepth'
       - 'image_transport/theora'
       </rosparam>
     </group>
