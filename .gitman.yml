@@ -2,7 +2,7 @@ location: .gitman
 sources:
 - name: realsense
   type: git
-  repo: git@nuc7:uav/realsense2_camera
+  repo: git@mrs.felk.cvut.cz:uav/realsense2_camera
   sparse_paths:
   -
   rev: master
@@ -12,7 +12,7 @@ sources:
 sources_locked:
 - name: realsense
   type: git
-  repo: git@nuc7:uav/realsense2_camera
+  repo: git@mrs.felk.cvut.cz:uav/realsense2_camera
   sparse_paths:
   -
   rev: 58eb9c8251b0f54de4002dd68b7088b82bcc1d66
