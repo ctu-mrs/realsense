@@ -1,10 +1,18 @@
 #!/bin/bash
 
+set -e
+
+trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
+trap 'echo "$0: \"${last_command}\" command failed with exit code $?"' ERR
+
 # Get path to script
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
-# Pull the repository to initialize subomdules
+# Pull the repository to initialize submodules
 cd $SCRIPTPATH
+
+echo "$0: Installing RealSense package"
+
 git pull
 
 sudo apt-key adv --keyserver keys.gnupg.net --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
@@ -47,3 +55,5 @@ echo "
 
 Reloading udev rules"
 sudo udevadm control --reload-rules && udevadm trigger
+
+echo "$0: Done"
