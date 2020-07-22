@@ -9,12 +9,11 @@ trap 'echo "$0: \"${last_command}\" command failed with exit code $?"' ERR
 MY_PATH=`dirname "$0"`
 MY_PATH=`( cd "$MY_PATH" && pwd )`
 
-# Pull the repository to initialize submodules
-gitman install
+echo "$0: Installing RealSense package"
 
 cd $MY_PATH
-
-echo "$0: Installing RealSense package"
+# Pull the repository to initialize submodules
+gitman install
 
 sudo apt-key adv --keyserver keys.gnupg.net --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
 
