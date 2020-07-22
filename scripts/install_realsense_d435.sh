@@ -5,15 +5,16 @@ set -e
 trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'echo "$0: \"${last_command}\" command failed with exit code $?"' ERR
 
-# Get path to script
-SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+# get the path to this script
+MY_PATH=`dirname "$0"`
+MY_PATH=`( cd "$MY_PATH" && pwd )`
 
 # Pull the repository to initialize submodules
-cd $SCRIPTPATH
+gitman install
+
+cd $MY_PATH
 
 echo "$0: Installing RealSense package"
-
-git pull
 
 sudo apt-key adv --keyserver keys.gnupg.net --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
 
@@ -48,7 +49,7 @@ modinfo uvcvideo | grep "version:"
 echo "
 
 Copying udev rules"
-sudo cp -v $SCRIPTPATH/../udev_rules/99-realsense-libusb.rules /etc/udev/rules.d/
+sudo cp -v $MY_PATH/../udev_rules/99-realsense-libusb.rules /etc/udev/rules.d/
 
 # Reload udev rules
 echo "
