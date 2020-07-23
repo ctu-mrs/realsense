@@ -11,6 +11,18 @@ MY_PATH=`( cd "$MY_PATH" && pwd )`
 
 echo "$0: Installing RealSense package"
 
+unattended=0
+for param in "$@"
+do
+  echo $param
+  if [ $param="--unattended" ]; then
+    echo "Installing in unattended mode"
+    unattended=1
+    subinstall_params="--unattended"
+  fi
+done
+
+
 cd $MY_PATH
 # Pull the repository to initialize submodules
 gitman install
@@ -29,7 +41,29 @@ sudo apt-get -y install ros-melodic-ddynamic-reconfigure
 sudo apt-get -y install ros-melodic-rgbd-launch
 
 # Install glfw library
-sudo apt-get -y install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+
+while true; do
+  if [[ "$unattended" == "1" ]]
+  then
+    resp=y
+  else
+    [[ -t 0 ]] && { read -n 2 -p $'\e[1;32mInstall libglfw3? [y/n] \e[0m\n\e[1;31m!!!              Note: This can break your setup.                       !!!\n!!!  We suggest to try it firstly without installing of this package.   !!!\n!!! When build of the REALSENSE package fails, you can run this script  !!!\n!!!              again to install libglw3 library.                      !!!
+ \e[0m' resp; }
+  fi
+  response=`echo $resp | sed -r 's/(.*)$/\1=/'`
+
+  if [[ $response =~ ^(y|Y)=$ ]]
+  then
+    sudo apt-get -y install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+    break
+  elif [[ $response =~ ^(n|N)=$ ]]
+  then
+    break
+  else
+    echo " What? \"$resp\" is not a correct answer. Try y+Enter."
+  fi
+done
+
 
 #Firstly uninstall all previous versions - KEEP THE UNINSTALL ORDER
 sudo apt-get -y purge librealsense2-dev librealsense2-dbg librealsense2-utils librealsense2-gl
