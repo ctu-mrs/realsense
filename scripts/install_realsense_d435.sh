@@ -8,6 +8,7 @@ trap 'echo "$0: \"${last_command}\" command failed with exit code $?"' ERR
 # get the path to this script
 MY_PATH=`dirname "$0"`
 MY_PATH=`( cd "$MY_PATH" && pwd )`
+distro=`lsb_release -r | awk '{ print $2 }'`
 
 echo "$0: Installing RealSense package"
 
@@ -34,11 +35,19 @@ sudo add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/
 # Refresh the list of repositories and packages available
 sudo apt-get update
 
-# Install required package for ROS wrapper
-sudo apt-get -y install ros-melodic-ddynamic-reconfigure
-
-# Install required launch file
-sudo apt-get -y install ros-melodic-rgbd-launch
+if [ "$distro" = "18.04" ]; then
+  # Install required package for ROS wrapper
+  sudo apt-get -y install ros-melodic-ddynamic-reconfigure
+  # Install required launch file
+  sudo apt-get -y install ros-melodic-rgbd-launch
+elif [ "$distro" = "20.04" ]; then
+  sudo apt-get -y install ros-noetic-ddynamic-reconfigure
+  sudo apt-get -y install ros-noetic-rgbd-launch
+else
+  echo -e "\e[31mUbuntu version not 18.04 or 20.04, installing Noetic packages.\e[0m"
+  sudo apt-get -y install ros-noetic-ddynamic-reconfigure
+  sudo apt-get -y install ros-noetic-rgbd-launch
+fi
 
 # Install glfw library
 
