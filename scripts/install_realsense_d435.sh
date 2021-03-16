@@ -83,7 +83,8 @@ while true; do
     # sudo apt-get -y purge librealsense2-dev librealsense2-dbg librealsense2-utils librealsense2-gl
     # sudo apt-get -y purge librealsense2 librealsense2-dkms
     # sudo apt-get -y purge librealsense2-udev-rules
-    dpkg -l | grep "realsense" | cut -d " " -f 3 | xargs sudo dpkg --purge
+
+    (dpkg -l | grep "realsense") && ( dpkg -l | grep "realsense" | cut -d " " -f 3 | xargs sudo dpkg --purge ) || ( echo "no current realsense installation detected" )
 
     break
   elif [[ $response =~ ^(n|N)=$ ]]
