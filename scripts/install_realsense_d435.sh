@@ -119,7 +119,7 @@ sudo apt-get -y install librealsense2-dkms librealsense2-utils
 # sudo apt-get -y install librealsense2-dkms=1.3.6-0ubuntu0 librealsense2-utils=2.25.0-0\~realsense0.1332 librealsense2=2.25.0-0\~realsense0.1332 librealsense2-gl=2.25.0-0\~realsense0.1332 librealsense2-udev-rules=2.25.0-0\~realsense0.1332  librealsense2-dev=2.25.0-0\~realsense0.1332 librealsense2-dbg=2.25.0-0\~realsense0.1332
 
 # Installing developer packages
-default=n
+default=y
 while true; do
   [[ -t 0 ]] && { read -t 5 -n 2 -p $'\e[1;32mDo you want to install RealSense development packages? Only useful for RealSense developers [y/n] (default: '"$default"$')\e[0m\n' resp || resp=$default ; }
   response=`echo $resp | sed -r 's/(.*)$/\1=/'`
