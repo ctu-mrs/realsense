@@ -1,21 +1,24 @@
 location: .gitman
 sources:
-- name: realsense
-  type: git
-  repo: git@mrs.felk.cvut.cz:uav/realsense2_camera
-  sparse_paths:
-  -
-  rev: master
-  link: ros_packages/realsense
-  scripts:
-  - git submodule update --init --recursive
+  - name: realsense
+    type: git
+    repo: git@mrs.felk.cvut.cz:uav/realsense2_camera
+    sparse_paths:
+      -
+    rev: master
+    link: ros_packages/realsense
+    scripts:
+      - git submodule update --init --recursive
 sources_locked:
-- name: realsense
-  type: git
-  repo: git@mrs.felk.cvut.cz:uav/realsense2_camera
-  sparse_paths:
+  - name: realsense
+    type: git
+    repo: git@mrs.felk.cvut.cz:uav/realsense2_camera
+    sparse_paths:
+      -
+    rev: 399462fffddeaec8ee18a60c6fd2d1bd0d776b3e
+    link: ros_packages/realsense
+    scripts:
+      - git submodule update --init --recursive
+default_group: ''
+groups:
   -
-  rev: 58eb9c8251b0f54de4002dd68b7088b82bcc1d66
-  link: ros_packages/realsense
-  scripts:
-  - git submodule update --init --recursive
