@@ -2,8 +2,8 @@
   <arg name="uav_name"            default="$(optenv UAV_NAME uav)"/>
   <arg name="serial_no_camera1"    			default="$(optenv REALSENSE_SERIAL_NUM0 036322250835)"/> 			<!-- Note: Run the script find_realsenses.sh to find the RealSense serial numbers -->
   <arg name="serial_no_camera2"    			default="$(optenv REALSENSE_SERIAL_NUM1 036322250835)"/>
-  <arg name="camera1"              			default="up_rgbd"/>		<!-- Note: Replace with camera name -->
-  <arg name="camera2"              			default="down_rgbd"/>		<!-- Note: Replace with camera name -->
+  <arg name="camera1"              			default="$(optenv UAV_NAME uav)/up_rgbd"/>		<!-- Note: Replace with camera name -->
+  <arg name="camera2"              			default="$(optenv UAV_NAME uav)/down_rgbd"/>		<!-- Note: Replace with camera name -->
   <arg name="tf_prefix_camera1"         default="$(arg camera1)"/>
   <arg name="tf_prefix_camera2"         default="$(arg camera2)"/>
   <arg name="initial_reset"             default="false"/>
