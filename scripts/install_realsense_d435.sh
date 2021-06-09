@@ -95,15 +95,18 @@ while true; do
   fi
 done
 
-# Add remote repositories
+# Remove old repositories (could cause problems when updating existing installation)
 if [ "$distro" = "18.04" ]; then
-  sudo add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo bionic main" -u
+  sudo add-apt-repository --remove "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo bionic main" -u
 elif [ "$distro" = "20.04" ]; then
-  sudo add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo focal main" -u
+  sudo add-apt-repository --remove "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo focal main" -u
 else
-  sudo add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo focal main" -u
+  sudo add-apt-repository --remove "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo focal main" -u
   echo -e "\e[31mUbuntu version not 18.04 or 20.04, installing Noetic packages.\e[0m"
 fi
+
+# Add current remote repositories
+sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
 
 # Refresh the list of repositories and packages available
 sudo apt-get update
