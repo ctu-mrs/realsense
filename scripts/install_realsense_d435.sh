@@ -30,6 +30,19 @@ gitman install
 
 sudo apt-key adv --keyserver keys.gnupg.net --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
 
+# Remove old repositories (could cause problems when updating existing installation)
+if [ "$distro" = "18.04" ]; then
+  sudo add-apt-repository --remove "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo bionic main" -u
+elif [ "$distro" = "20.04" ]; then
+  sudo add-apt-repository --remove "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo focal main" -u
+else
+  sudo add-apt-repository --remove "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo focal main" -u
+  echo -e "\e[31mUbuntu version not 18.04 or 20.04, installing Noetic packages.\e[0m"
+fi
+
+# Add current remote repositories
+sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
+
 # Refresh the list of repositories and packages available
 sudo apt-get update
 
@@ -95,18 +108,6 @@ while true; do
   fi
 done
 
-# Remove old repositories (could cause problems when updating existing installation)
-if [ "$distro" = "18.04" ]; then
-  sudo add-apt-repository --remove "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo bionic main" -u
-elif [ "$distro" = "20.04" ]; then
-  sudo add-apt-repository --remove "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo focal main" -u
-else
-  sudo add-apt-repository --remove "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo focal main" -u
-  echo -e "\e[31mUbuntu version not 18.04 or 20.04, installing Noetic packages.\e[0m"
-fi
-
-# Add current remote repositories
-sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
 
 # Refresh the list of repositories and packages available
 sudo apt-get update
