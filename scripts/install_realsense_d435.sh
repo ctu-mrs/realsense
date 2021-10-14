@@ -28,7 +28,7 @@ cd $MY_PATH
 # Pull the repository to initialize submodules
 gitman install
 
-sudo apt-key adv --keyserver keys.gnupg.net --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
+sudo apt-key -y adv --keyserver keys.gnupg.net --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
 
 # Remove old repositories (could cause problems when updating existing installation)
 if [ "$distro" = "18.04" ]; then
@@ -44,7 +44,7 @@ fi
 sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
 
 # Refresh the list of repositories and packages available
-sudo apt-get update
+sudo apt-get -y update
 
 if [ "$distro" = "18.04" ]; then
   # Install required package for ROS wrapper
@@ -87,7 +87,12 @@ done
 # Firstly uninstall all previous versions - KEEP THE UNINSTALL ORDER
 default=y
 while true; do
-  [[ -t 0 ]] && { read -t 5 -n 2 -p $'\e[1;32mDo you want to uninstall ALL previously installed RealSense packages? Recommended! [y/n] (default: '"$default"$')\e[0m\n' resp || resp=$default ; }
+  if [[ "$unattended" == "1" ]]
+  then
+    resp=y
+  else
+    [[ -t 0 ]] && { read -t 5 -n 2 -p $'\e[1;32mDo you want to uninstall ALL previously installed RealSense packages? Recommended! [y/n] (default: '"$default"$')\e[0m\n' resp || resp=$default ; }
+  fi
   response=`echo $resp | sed -r 's/(.*)$/\1=/'`
 
   if [[ $response =~ ^(y|Y)=$ ]]
@@ -110,14 +115,14 @@ done
 
 
 # Refresh the list of repositories and packages available
-sudo apt-get update
+sudo apt-get -y update
 
 # Install newest librealsense - install all of these: librealsense2 librealsense2-dkms librealsense2-gl librealsense2-net librealsense2-udev-rules librealsense2-utils
 sudo apt-get -y install librealsense2-dkms librealsense2-utils
 
 # Install librealsense in version 2.16.0
-# sudo apt -y install librealsense2 librealsense2-dkms librealsense2-dev librealsense2-dbg librealsense2-utils
-# sudo apt-get install librealsense2=2.16.0-0\~realsense0.85 librealsense2-dev=2.16.0-0\~realsense0.85 librealsense2-dbg=2.16.0-0\~realsense0.85 librealsense2-utils=2.16.0-0\~realsense0.85
+# sudo apt-get -y install librealsense2 librealsense2-dkms librealsense2-dev librealsense2-dbg librealsense2-utils
+# sudo apt-get -y install librealsense2=2.16.0-0\~realsense0.85 librealsense2-dev=2.16.0-0\~realsense0.85 librealsense2-dbg=2.16.0-0\~realsense0.85 librealsense2-utils=2.16.0-0\~realsense0.85
 
 # Install librealsense in version 2.25.0
 # sudo apt-get -y install librealsense2-dkms=1.3.6-0ubuntu0 librealsense2-utils=2.25.0-0\~realsense0.1332 librealsense2=2.25.0-0\~realsense0.1332 librealsense2-gl=2.25.0-0\~realsense0.1332 librealsense2-udev-rules=2.25.0-0\~realsense0.1332  librealsense2-dev=2.25.0-0\~realsense0.1332 librealsense2-dbg=2.25.0-0\~realsense0.1332
@@ -125,7 +130,12 @@ sudo apt-get -y install librealsense2-dkms librealsense2-utils
 # Installing developer packages
 default=y
 while true; do
-  [[ -t 0 ]] && { read -t 5 -n 2 -p $'\e[1;32mDo you want to install RealSense development packages? Only useful for RealSense developers [y/n] (default: '"$default"$')\e[0m\n' resp || resp=$default ; }
+  if [[ "$unattended" == "1" ]]
+  then
+    resp=y
+  else
+    [[ -t 0 ]] && { read -t 5 -n 2 -p $'\e[1;32mDo you want to install RealSense development packages? Only useful for RealSense developers [y/n] (default: '"$default"$')\e[0m\n' resp || resp=$default ; }
+  fi
   response=`echo $resp | sed -r 's/(.*)$/\1=/'`
 
   if [[ $response =~ ^(y|Y)=$ ]]
