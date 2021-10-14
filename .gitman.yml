@@ -1,6 +1,6 @@
 location: .gitman
 sources:
-  - repo: git@github.com:ctu-mrs/realsense-ros
+  - repo: https://github.com/ctu-mrs/realsense-ros.git
     name: realsense-ros
     rev: master
     type: git
