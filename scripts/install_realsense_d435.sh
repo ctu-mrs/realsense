@@ -152,9 +152,8 @@ while true; do
   fi
 done
 
-
 # Verify that the kernel is updated
-modinfo uvcvideo | grep "version:"
+[ ! -z "$GITHUB_CI" ] && modinfo uvcvideo | grep "version:"
 
 # Copy udev rules
 echo "
