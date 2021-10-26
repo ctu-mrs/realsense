@@ -1,4 +1,4 @@
-# Realsense D435 package
+# Realsense Meta-package
 
 ## Installation
 
@@ -20,16 +20,18 @@ Remove the conflicting libusb acquired during bluefox installation.
 rm /opt/mvIMPACT_acquire/lib/x86_64/libusb-1.0.so.0.0.0
 ```
 ### udev rules reloading problem
-Check if you have correct prime-select, if you haven't connected the doc station it should be intel ( depends on your system ), to check use 
+
+Check if you have correct prime-select, if you haven't connected the doc station it should be intel ( depends on your system ), to check use
 ```bash
 sudo prime-select query
 ```
-To select use 
+To select use
 ```bash
 sudo prime-select intel
 ```
 
 ### Realsense enumerated as USB 2.0 device
+
 Plugging the USB 3.0 original cable slowly into the USB port of the host causes it to be enumerated as USB 2.0 device. The current USB mode can be checked by lsusb -t - 5000M is USB 3.0, 480M is USB 2.0. Enumerating Realsense D435 as USB 2.0 devices causes some image streams to be unavailable.
 
 Solution:

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>realsense</name>
+  <version>1.0.0</version>
+  <description>RealSense launch files</description>
+
+  <maintainer email="tomas.baca@fel.cvut.cz">Tomas Baca</maintainer>
+  <maintainer email="matej.petrlik@fel.cvut.cz">Matej Petrlik</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+
+  <export>
+  </export>
+
+</package>
