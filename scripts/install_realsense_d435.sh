@@ -118,7 +118,8 @@ done
 sudo apt-get -y update
 
 # Install newest librealsense - install all of these: librealsense2 librealsense2-dkms librealsense2-gl librealsense2-net librealsense2-udev-rules librealsense2-utils
-[ ! -z "$GITHUB_CI" ] && sudo apt-get -y install librealsense2-dkms librealsense2-utils
+# [ ! -z "$GITHUB_CI" ] && sudo apt-get -y install librealsense2-dkms librealsense2-utils
+sudo apt-get -y install librealsense2-dkms librealsense2-utils
 
 # Install librealsense in version 2.16.0
 # sudo apt-get -y install librealsense2 librealsense2-dkms librealsense2-dev librealsense2-dbg librealsense2-utils
