@@ -67,7 +67,7 @@ while true; do
   then
     resp=y
   else
-    [[ -t 0 ]] && { read -n 2 -p $'\e[1;32mInstall libglfw3? [y/n] \e[0m\n\e[1;31m!!!              Note: This can break your setup.                       !!!\n!!!  We suggest to try it firstly without installing of this package.   !!!\n!!! When build of the REALSENSE package fails, you can run this script  !!!\n!!!              again to install libglw3 library.                      !!!
+    [[ -t 0 ]] && { read -n 2 -p $'\e[1;32mInstall libglfw3? [y/n] \e[0m\n\e[1;31m!!!              Note: This can break your setup.                       !!!\n!!!  We suggest to try it first without installing of this package.   !!!\n!!! When build of the REALSENSE package fails, you can run this script  !!!\n!!!              again to install libglw3 library.                      !!!
  \e[0m' resp; }
   fi
   response=`echo $resp | sed -r 's/(.*)$/\1=/'`
@@ -84,7 +84,7 @@ while true; do
   fi
 done
 
-# Firstly uninstall all previous versions - KEEP THE UNINSTALL ORDER
+# First uninstall all previous versions - KEEP THE UNINSTALL ORDER
 default=y
 while true; do
   if [[ "$unattended" == "1" ]]
