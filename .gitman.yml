@@ -14,7 +14,7 @@ sources:
 sources_locked:
   - repo: https://github.com/ctu-mrs/realsense-ros.git
     name: realsense-ros
-    rev: 1759e65708f46d9f88050e5b859447299d54fc50
+    rev: c656aa612a327487e7a32b78c8d881fa4fa22ae6
     type: git
     sparse_paths:
       -
