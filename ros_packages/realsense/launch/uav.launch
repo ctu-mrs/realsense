@@ -50,6 +50,9 @@
       <arg name="initial_reset"            value="$(arg initial_reset)"/>
       <arg name="manager"                  value="$(arg manager)"/>
 
+      <arg if="$(eval arg('manager') == 'realsense2_camera_manager')" name="external_manager" value="false"/>
+      <arg unless="$(eval arg('manager') == 'realsense2_camera_manager')" name="external_manager" value="true"/>
+
       <arg name="serial_no"                value="$(arg serial_no)"/>
       <arg name="json_file_path"           value="$(arg json_file_path)"/>
 
