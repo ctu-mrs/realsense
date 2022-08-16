@@ -10,6 +10,9 @@ MY_PATH=`dirname "$0"`
 MY_PATH=`( cd "$MY_PATH" && pwd )`
 distro=`lsb_release -r | awk '{ print $2 }'`
 
+debian=`lsb_release -d | grep -i debian | wc -l`
+[[ "$debian" -eq "1" ]] && ROS_DISTRO="noetic" && distro="20.04" && DEBIAN=true
+
 echo "$0: Installing RealSense package"
 
 unattended=0
