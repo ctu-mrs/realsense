@@ -182,7 +182,7 @@ else
       fi
       cd librealsense
       git pull
-      source scripts/patch-realsense-ubuntu-lts-hwe.sh
+      source scripts/patch-realsense-ubuntu-lts-hwe.sh ko
       cd $MY_PATH
 
       break

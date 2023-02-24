@@ -4,6 +4,7 @@ sources:
     name: realsense-ros
     rev: master
     type: git
+    params:
     sparse_paths:
       -
     links:
@@ -16,6 +17,7 @@ sources_locked:
     name: realsense-ros
     rev: c656aa612a327487e7a32b78c8d881fa4fa22ae6
     type: git
+    params:
     sparse_paths:
       -
     links:
