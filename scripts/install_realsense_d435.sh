@@ -120,41 +120,85 @@ done
 # Refresh the list of repositories and packages available
 sudo apt-get -y update
 
-# Install newest librealsense - install all of these: librealsense2 librealsense2-dkms librealsense2-gl librealsense2-net librealsense2-udev-rules librealsense2-utils
-# [ ! -z "$GITHUB_CI" ] && sudo apt-get -y install librealsense2-dkms librealsense2-utils
-sudo apt-get -y install librealsense2-dkms librealsense2-utils
+#check that pre-build packages exist
+pre_build_exists=`apt-cache search librealsense2-dkmss`
 
-# Install librealsense in version 2.16.0
-# sudo apt-get -y install librealsense2 librealsense2-dkms librealsense2-dev librealsense2-dbg librealsense2-utils
-# sudo apt-get -y install librealsense2=2.16.0-0\~realsense0.85 librealsense2-dev=2.16.0-0\~realsense0.85 librealsense2-dbg=2.16.0-0\~realsense0.85 librealsense2-utils=2.16.0-0\~realsense0.85
+if [[ $pre_build_exists ]]; then
+  # Install newest librealsense - install all of these: librealsense2 librealsense2-dkms librealsense2-gl librealsense2-net librealsense2-udev-rules librealsense2-utils
+  # [ ! -z "$GITHUB_CI" ] && sudo apt-get -y install librealsense2-dkms librealsense2-utils
+  sudo apt-get -y install librealsense2-dkms librealsense2-utils
 
-# Install librealsense in version 2.25.0
-# sudo apt-get -y install librealsense2-dkms=1.3.6-0ubuntu0 librealsense2-utils=2.25.0-0\~realsense0.1332 librealsense2=2.25.0-0\~realsense0.1332 librealsense2-gl=2.25.0-0\~realsense0.1332 librealsense2-udev-rules=2.25.0-0\~realsense0.1332  librealsense2-dev=2.25.0-0\~realsense0.1332 librealsense2-dbg=2.25.0-0\~realsense0.1332
+  # Install librealsense in version 2.16.0
+  # sudo apt-get -y install librealsense2 librealsense2-dkms librealsense2-dev librealsense2-dbg librealsense2-utils
+  # sudo apt-get -y install librealsense2=2.16.0-0\~realsense0.85 librealsense2-dev=2.16.0-0\~realsense0.85 librealsense2-dbg=2.16.0-0\~realsense0.85 librealsense2-utils=2.16.0-0\~realsense0.85
 
-# Installing developer packages
-default=y
-while true; do
-  if [[ "$unattended" == "1" ]]
-  then
-    resp=y
-  else
-    [[ -t 0 ]] && { read -t 5 -n 2 -p $'\e[1;32mDo you want to install RealSense development packages? Only useful for RealSense developers [y/n] (default: '"$default"$')\e[0m\n' resp || resp=$default ; }
-  fi
-  response=`echo $resp | sed -r 's/(.*)$/\1=/'`
+  # Install librealsense in version 2.25.0
+  # sudo apt-get -y install librealsense2-dkms=1.3.6-0ubuntu0 librealsense2-utils=2.25.0-0\~realsense0.1332 librealsense2=2.25.0-0\~realsense0.1332 librealsense2-gl=2.25.0-0\~realsense0.1332 librealsense2-udev-rules=2.25.0-0\~realsense0.1332  librealsense2-dev=2.25.0-0\~realsense0.1332 librealsense2-dbg=2.25.0-0\~realsense0.1332
 
-  if [[ $response =~ ^(y|Y)=$ ]]
-  then
+  # Installing developer packages
+  default=y
+  while true; do
+    if [[ "$unattended" == "1" ]]
+    then
+      resp=y
+    else
+      [[ -t 0 ]] && { read -t 5 -n 2 -p $'\e[1;32mDo you want to install RealSense development packages? Only useful for RealSense developers [y/n] (default: '"$default"$')\e[0m\n' resp || resp=$default ; }
+    fi
+    response=`echo $resp | sed -r 's/(.*)$/\1=/'`
 
-    sudo apt-get -y install librealsense2-dev librealsense2-dbg
+    if [[ $response =~ ^(y|Y)=$ ]]
+    then
 
-    break
-  elif [[ $response =~ ^(n|N)=$ ]]
-  then
-    break
-  else
-    echo " What? \"$resp\" is not a correct answer. Try y+Enter."
-  fi
-done
+      sudo apt-get -y install librealsense2-dev librealsense2-dbg
+
+      break
+    elif [[ $response =~ ^(n|N)=$ ]]
+    then
+      break
+    else
+      echo " What? \"$resp\" is not a correct answer. Try y+Enter."
+    fi
+  done
+else
+
+  # build from source
+  default=y
+  while true; do
+    if [[ "$unattended" == "1" ]]
+    then
+      resp=y
+    else
+      [[ -t 0 ]] && { read -t 5 -n 2 -p $'\e[1;32mPre-build library is not available for your version of the kernel. Do you want to install RealSense from source  [y/n] (default: '"$default"$')\e[0m\n' resp || resp=$default ; }
+    fi
+    response=`echo $resp | sed -r 's/(.*)$/\1=/'`
+
+    if [[ $response =~ ^(y|Y)=$ ]]
+    then
+
+      cd /tmp/
+      folder="librealsense"
+      if ! git clone https://github.com/IntelRealSense/librealsense.git "${folder}" 2>/dev/null && [ -d "${folder}" ] ; then
+          echo "Folder ${folder} exists"
+      fi
+      cd librealsense
+      git pull
+      source scripts/patch-realsense-ubuntu-lts-hwe.sh
+      cd $MY_PATH
+
+      break
+    elif [[ $response =~ ^(n|N)=$ ]]
+    then
+        echo "Exiting without successful installation of the realsense support."
+        exit
+        break
+      else
+        echo " What? \"$resp\" is not a correct answer. Try y+Enter."
+      fi
+    done
+
+fi
+
+
 
 # Verify that the kernel is updated
 [ ! -z "$GITHUB_CI" ] && modinfo uvcvideo | grep "version:"
