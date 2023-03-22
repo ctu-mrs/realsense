@@ -1,5 +1,6 @@
 <launch>
 
+
   <arg name="uav_name"            default="$(optenv UAV_NAME)"/>
   <arg name="namespace"           default="t265"/>
   <arg name="device_type"         default="t265"/>
@@ -18,6 +19,11 @@
   <arg name="enable_gyro"         default="true"/>
   <arg name="enable_accel"        default="true"/>
   <arg name="enable_pose"         default="true"/>
+
+    <!-- Parameters for T265 SLAM -->
+    <!-- Link for detailed parameter description:https://github.com/IntelRealSense/librealsense/blob/master/doc/t265.md#are-there-any-t265-specific-options -->
+  <rosparam param="/$(optenv UAV_NAME)/tracking_module/enable_relocalization">False</rosparam>
+  <rosparam param="/$(optenv UAV_NAME)/tracking_module/enable_pose_jumping">False</rosparam>
 
   <arg name="fisheye_fps"         default="30"/>
   <arg name="gyro_fps"            default="200"/>
