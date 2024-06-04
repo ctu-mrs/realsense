@@ -4,6 +4,7 @@ sources:
     name: realsense-ros
     rev: master
     type: git
+    params:
     sparse_paths:
       -
     links:
@@ -14,8 +15,9 @@ sources:
 sources_locked:
   - repo: https://github.com/ctu-mrs/realsense-ros.git
     name: realsense-ros
-    rev: c656aa612a327487e7a32b78c8d881fa4fa22ae6
+    rev: b093a670ffebc6243d2ed1feb79d36e7657cf21c
     type: git
+    params:
     sparse_paths:
       -
     links:
