@@ -7,6 +7,9 @@ run install script:
 ./scripts/install_realsense_d435.sh
 ```
 
+### Jetson
+- follow the official instructions [here](https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_jetson.md)
+
 ## Troubleshooting
 
 ### libusb
