@@ -29,6 +29,8 @@
   <arg name="gyro_fps"            default="200"/>
   <arg name="accel_fps"           default="62"/>
 
+  <arg name="publish_odom_tf"     default="true"/>
+
     <!-- Disable bond topics by default -->
   <arg name="bond"                            default="false" />
   <arg name="respawn"                         default="$(arg bond)" />
@@ -57,6 +59,8 @@
       <arg name="fisheye_fps"              value="$(arg fisheye_fps)"/>
       <arg name="gyro_fps"                 value="$(arg gyro_fps)"/>
       <arg name="accel_fps"                value="$(arg accel_fps)"/>
+
+      <arg name="publish_odom_tf"          value="$(arg publish_odom_tf)"/>
 
     </include>
 
