@@ -19,7 +19,7 @@
   <depend>launch_ros</depend>
   <depend>builtin_interfaces</depend>
 
-  <depend>realsense2-camera</depend>
+  <depend>realsense2_camera</depend>
 
   <export>
     <build_type>ament_cmake</build_type>
