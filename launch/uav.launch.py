@@ -6,7 +6,9 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import LaunchConfiguration
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, OpaqueFunction
+
+custom_config = LaunchConfiguration('custom_config')
 
 uav_name = LaunchConfiguration('uav_name')
 uav_namespace = LaunchConfiguration('uav_namespace')
@@ -47,16 +49,10 @@ accel_fps = LaunchConfiguration("accel_fps")
 bond = LaunchConfiguration("bond")
 respawn = LaunchConfiguration("respawn")
 
-from launch.action import Action
+def launch_setup(context):
 
-class CustomAction(Action):
-    def __init__(self):
-        super().__init__()
-    
-    def execute(self, context):
-        global color_width, color_height
-
-        return [IncludeLaunchDescription(
+    return [
+        IncludeLaunchDescription(
             PythonLaunchDescriptionSource([
                 PathJoinSubstitution([
                     FindPackageShare('mrs_realsense'),
@@ -65,6 +61,7 @@ class CustomAction(Action):
                 ])
             ]),
             launch_arguments={
+                'custom_config': custom_config,
                 'camera_namespace': uav_name,
                 'camera_name': uav_namespace,
                 'initial_reset': initial_reset,
@@ -86,11 +83,12 @@ class CustomAction(Action):
                 'gyro_fps': gyro_fps,
                 'accel_fps': accel_fps
             }.items()
-        )]
+    )]
 
 def generate_launch_description():
 
     return LaunchDescription([
+        DeclareLaunchArgument('custom_config',       default_value=''),
 
         DeclareLaunchArgument('uav_name',            default_value=os.environ["UAV_NAME"]),
         DeclareLaunchArgument('uav_namespace',       default_value="rgbd"),
@@ -135,8 +133,7 @@ def generate_launch_description():
         DeclareLaunchArgument("bond",                default_value="false" ),
         DeclareLaunchArgument("respawn",             default_value="$(arg bond)" ),
 
-        #OpaqueFunction(function=get_launch_config_value),
-        CustomAction(),
+        OpaqueFunction(function=launch_setup)#, kwargs = {'params' : set_configurable_parameters(configurable_parameters)})
 
         # IncludeLaunchDescription(
         #     PythonLaunchDescriptionSource([

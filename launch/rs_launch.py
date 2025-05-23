@@ -22,7 +22,8 @@ from launch.substitutions import LaunchConfiguration
 from launch.substitutions import TextSubstitution
 
 
-configurable_parameters = [{'name': 'camera_name',                  'default': 'camera', 'description': 'camera unique name'},
+configurable_parameters = [{'name': 'custom_config',                'default': '', 'description': 'condif from the user'},
+                           {'name': 'camera_name',                  'default': 'camera', 'description': 'camera unique name'},
                            {'name': 'camera_namespace',             'default': 'camera', 'description': 'namespace for camera'},
                            {'name': 'serial_no',                    'default': "''", 'description': 'choose device by serial number'},
                            {'name': 'usb_port_id',                  'default': "''", 'description': 'choose device by usb port id'},
@@ -107,19 +108,36 @@ def launch_setup(context, params, param_name_suffix=''):
         # see related PR that was merged for humble, iron, rolling: https://github.com/ros2/launch/pull/577
         _output = context.perform_substitution(_output)
 
+    _custom_config_file = LaunchConfiguration('custom_config').perform(context)
+
+    # pull remapping of the topics out of the yaml file
+    with open(_custom_config_file, 'r') as f:
+        yaml_data = yaml.load(f, Loader=yaml.FullLoader)
+
+        prefix = f"/{LaunchConfiguration('camera_namespace').perform(context)}/{LaunchConfiguration('camera_name').perform(context)}"
+        remappings_subyaml = yaml_data[prefix]['ros__parameters']['remappings']
+        remappings = []
+        for orig_name in remappings_subyaml:
+            new_name = remappings_subyaml[orig_name]
+            print(f"remapping topic {orig_name} to {new_name}")
+            remappings.append((orig_name, new_name))
+
+        print("remappings: ", remappings)
+
     return [
         launch_ros.actions.Node(
             package='realsense2_camera',
             namespace=LaunchConfiguration('camera_namespace' + param_name_suffix),
             name=LaunchConfiguration('camera_name' + param_name_suffix),
             executable='realsense2_camera_node',
-            parameters=[params, params_from_file],
+            parameters=[params, params_from_file, _custom_config_file],
             output=_output,
             arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level' + param_name_suffix)],
             emulate_tty=True,
-            remappings=[('~/depth/image_rect_raw', '~/depth/image_raw'),
-                        ('~/depth/image_rect_raw/compressed', '~/depth/image_raw/compressed'),
-                        ('~/depth/image_rect_raw/compressedDepth', '~/depth/image_raw/compressedDepth')]
+            # remappings=[('~/depth/image_rect_raw', '~/depth/image_raw'),
+            #             ('~/depth/image_rect_raw/compressed', '~/depth/image_raw/compressed'),
+            #             ('~/depth/image_rect_raw/compressedDepth', '~/depth/image_raw/compressedDepth')]
+            remappings=remappings
         )
     ]
 
