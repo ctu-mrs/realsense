@@ -65,6 +65,7 @@ def launch_setup(context):
                 'camera_namespace': uav_name,
                 'camera_name': uav_namespace,
                 'initial_reset': initial_reset,
+                # "profile" params are processed this way because it was a test of manipulation with params provided to the launchfile
                 'rgb_camera.color_profile': str(color_width.perform(context)) + 'x' + str(color_height.perform(context)) + 'x' + str(color_fps.perform(context)),
                 'depth_module.depth_profile': str(depth_width.perform(context)) + 'x' + str(depth_height.perform(context)) + 'x' + str(depth_fps.perform(context)),
                 'depth_module.infra_profile': str(infra_width.perform(context)) + 'x' + str(infra_height.perform(context)) + 'x' + str(infra_fps.perform(context)),
@@ -88,7 +89,11 @@ def launch_setup(context):
 def generate_launch_description():
 
     return LaunchDescription([
-        DeclareLaunchArgument('custom_config',       default_value=''),
+        DeclareLaunchArgument('custom_config',       default_value=PathJoinSubstitution([
+                                                                        FindPackageShare('mrs_realsense'),
+                                                                        'config',
+                                                                        'custom_config.yaml'
+                                                                    ])),
 
         DeclareLaunchArgument('uav_name',            default_value=os.environ["UAV_NAME"]),
         DeclareLaunchArgument('uav_namespace',       default_value="rgbd"),
@@ -133,20 +138,6 @@ def generate_launch_description():
         DeclareLaunchArgument("bond",                default_value="false" ),
         DeclareLaunchArgument("respawn",             default_value="$(arg bond)" ),
 
+        # we use OpaqueFunction so we have 'context' object and thus we can do more advanced stuff
         OpaqueFunction(function=launch_setup)#, kwargs = {'params' : set_configurable_parameters(configurable_parameters)})
-
-        # IncludeLaunchDescription(
-        #     PythonLaunchDescriptionSource([
-        #         PathJoinSubstitution([
-        #             FindPackageShare('realsense'),
-        #             'launch',
-        #             'rs_launch.py'
-        #         ])
-        #     ]),
-        #     launch_arguments={
-        #         'rgb_camera.color_profile': color_width_ + 'x' + '720' + 'x30',
-        #         'camera_namespace': uav_name,
-        #         'camera_name': uav_namespace,
-        #     }.items()
-        # ),
     ])

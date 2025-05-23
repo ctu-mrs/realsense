@@ -110,19 +110,21 @@ def launch_setup(context, params, param_name_suffix=''):
 
     _custom_config_file = LaunchConfiguration('custom_config').perform(context)
 
+    remappings = []
     # pull remapping of the topics out of the yaml file
-    with open(_custom_config_file, 'r') as f:
-        yaml_data = yaml.load(f, Loader=yaml.FullLoader)
+    if _custom_config_file != '':
+        with open(_custom_config_file, 'r') as f:
+            yaml_data = yaml.load(f, Loader=yaml.FullLoader)
 
-        prefix = f"/{LaunchConfiguration('camera_namespace').perform(context)}/{LaunchConfiguration('camera_name').perform(context)}"
-        remappings_subyaml = yaml_data[prefix]['ros__parameters']['remappings']
-        remappings = []
-        for orig_name in remappings_subyaml:
-            new_name = remappings_subyaml[orig_name]
-            print(f"remapping topic {orig_name} to {new_name}")
-            remappings.append((orig_name, new_name))
+            prefix = f"/{LaunchConfiguration('camera_namespace').perform(context)}/{LaunchConfiguration('camera_name').perform(context)}"
+            if prefix in yaml_data and 'remappings' in yaml_data[prefix]['ros__parameters']:
+                remappings_subyaml = yaml_data[prefix]['ros__parameters']['remappings']
+                for orig_name in remappings_subyaml:
+                    new_name = remappings_subyaml[orig_name]
+                    print(f"remapping topic {orig_name} to {new_name}")
+                    remappings.append((orig_name, new_name))
 
-        print("remappings: ", remappings)
+    print("remappings: ", remappings)
 
     return [
         launch_ros.actions.Node(

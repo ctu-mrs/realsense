@@ -2,10 +2,12 @@
   ros__parameters:
     remappings:
       '~/depth/image_rect_raw': ~/depth/image_raw
-      '~/depth/image_rect_raw/compressed': '~/depth/image_raw/compressed'
-      '~/depth/image_rect_raw/compressedDepth': '~/depth/image_raw/compressedDepth'
-    # rgb_camera:
-    #   color_profile: 1920x1080x6
+      '~/depth/image_rect_raw/compressed': ~/depth/image_raw/compressed
+      '~/depth/image_rect_raw/compressedDepth': ~/depth/image_raw/compressedDepth
+    aligned_depth_to_color:
+      image_raw:
+        compressed:
+          format: jpeg
 
 # /uav1/rgbd:
 #   ros__parameters:
