@@ -1,0 +1,12 @@
+services:
+  realsense:
+    image: mrs_realsense:latest
+    build: .
+    privileged: true
+    network_mode: "host"
+    volumes:
+      - type: bind
+        source: ./cfg.yaml
+        target: /custom_config.yaml
+        read_only: true
+    command: custom_config:=/custom_config.yaml
