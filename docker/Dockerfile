@@ -17,7 +17,6 @@ RUN apt-get -y install software-properties-common curl bash
 
 RUN curl https://ctu-mrs.github.io/ppa2-${PPA_VARIANT}/add_ppa.sh | bash
 
-RUN apt-get -y install ros-jazzy-mrs-uav-core
 RUN apt-get -y install ros-jazzy-realsense2*
 RUN apt-get -y install ros-jazzy-mrs-realsense
 RUN apt-get -y install ros-jazzy-compressed-image-transport
