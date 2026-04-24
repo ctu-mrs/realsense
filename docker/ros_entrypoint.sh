@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /opt/ros/jazzy/setup.sh
+. /opt/ros/$ROS_DISTRO/setup.sh
 
 #. /home/ubuntu/ws/install/setup.sh
 
@@ -12,4 +12,4 @@ fi
 #cd /home/ubuntu/ws
 ros2 launch mrs_realsense uav.launch.py $@
 
-# docker run --privileged -it -v ./custom_config.yaml:/home/ubuntu/ws/custom_config.yaml mrs_realsense:latest custom_config:=custom_config.yaml
+# docker run --privileged -it -v ./custom_config.yaml:/home/ubuntu/ws/custom_config.yaml ctumrs/realsense:latest custom_config:=custom_config.yaml
