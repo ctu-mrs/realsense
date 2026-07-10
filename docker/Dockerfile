@@ -1,6 +1,7 @@
 ARG PPA_VARIANT=unstable
+ARG BASE_IMAGE=ctumrs/mrs_uav_system_core:${PPA_VARIANT}
 
-FROM ctumrs/mrs_uav_system:${PPA_VARIANT}
+FROM ${BASE_IMAGE}
 
 # INSTALL the MRS UAV System
 
