@@ -11,7 +11,7 @@ fi
 
 source /opt/ros/$ROS_DISTRO/setup.bash
 
-if [-z UAV_NAME ]; then
+if [ -z "$UAV_NAME" ]; then
   echo "$0: the UAV_NAME environment variable is not set"
   exit 1
 fi
